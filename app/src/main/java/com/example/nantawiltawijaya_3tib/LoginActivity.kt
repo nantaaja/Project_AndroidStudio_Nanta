@@ -44,6 +44,8 @@ class LoginActivity : AppCompatActivity() {
             intent.putExtra("password", pass)
             intent.putExtra("umur", 30)
             startActivity(intent)
+
+            finish()
         }
     }
 }

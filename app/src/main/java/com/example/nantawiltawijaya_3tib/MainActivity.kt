@@ -36,13 +36,17 @@ class MainActivity : AppCompatActivity() {
         binding.txtUsername.text = user
         binding.txtPassword.setText(pass)
 
+        binding.btnDetail.setOnClickListener {
+            val intent = Intent(this, DetailActivity::class.java)
+            startActivity(intent)
+        }
+
         binding.btnSnackBar.setOnClickListener {
             Snackbar.make(binding.root, "Item dihapus",
                 Snackbar.LENGTH_LONG
             )
                 .setAction("BATAL") {
-                val intent = Intent(this, LoginActivity :: class.java)
-                startActivity(intent)
+
                 }
                 .show()
         }
@@ -50,16 +54,21 @@ class MainActivity : AppCompatActivity() {
         binding.btnAlert.setOnClickListener {
             MaterialAlertDialogBuilder(this)
                 .setTitle("Hapus data")
-                .setMessage("Data yang dihapus tidak " +
-                        "bisa dikembalikan.")
-                .setNegativeButton("Batal", null)
-                .setPositiveButton("Hapus") { dialog, _ ->
-                    // proses hapus
+                .setMessage("Apakah Anda yakin ingin LogOut?")
+                .setNegativeButton("Tidak") { dialog, _ ->
                     dialog.dismiss()
+                }
+                .setPositiveButton("Ya") { dialog, _ ->
+                    // Pindah ke halaman Login dan hapus riwayat activity
+                    val intent = Intent(this, LoginActivity::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    startActivity(intent)
+                    finish()
                 }
                 .setCancelable(false)
                 .show()
         }
+
         binding.btnKembali.setOnClickListener {
 //            val intent = Intent(this, LoginActivity :: class.java)
 //            startActivity(intent) gak perlu dibikin kalau mau langsung keluar.
