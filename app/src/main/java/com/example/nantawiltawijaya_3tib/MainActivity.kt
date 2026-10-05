@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.nantawiltawijaya_3tib.databinding.ActivityMainBinding
+import com.example.nantawiltawijaya_3tib.pertemuan_5.LimaActivity
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 
@@ -74,6 +75,10 @@ class MainActivity : AppCompatActivity() {
 //            startActivity(intent) gak perlu dibikin kalau mau langsung keluar.
 
             finish()
+        }
+
+        binding.btnToLima.setOnClickListener {
+            startActivity(Intent(this, LimaActivity::class.java))
         }
     }
 }
