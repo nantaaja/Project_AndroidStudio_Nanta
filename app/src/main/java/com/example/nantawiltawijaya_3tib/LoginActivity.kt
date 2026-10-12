@@ -7,6 +7,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -32,20 +33,27 @@ class LoginActivity : AppCompatActivity() {
 //        val username : EditText = findViewById(R.id.edtUsername)
 //        val password : EditText = findViewById(R.id.edtPassword)
 
+        val sharedPref = getSharedPreferences("user_pref", MODE_PRIVATE)
+
+
         binding.btnLogin.setOnClickListener {
             val user = binding.edtUsername.text.toString()
             val pass = binding.edtPassword.text.toString()
-            Log.e( "Hasil",  "Username $user Password $pass")
 
-            Toast.makeText(this, "Username $user Password $pass", Toast.LENGTH_LONG).show()
-
-            val intent = Intent(this, MainActivity :: class.java)
-            intent.putExtra("username", user)
-            intent.putExtra("password", pass)
-            intent.putExtra("umur", 30)
-            startActivity(intent)
-
-            finish()
+            if (user.isNotEmpty() && user == pass) {
+                val editor = sharedPref.edit()
+                editor.putBoolean("isLogin", true)
+                editor.putString("username", user)
+                editor.apply()
+                startActivity(Intent(this, MainActivity::class.java))
+                finish()
+            } else {
+                AlertDialog.Builder(this)
+                    .setTitle("Login Gagal")
+                    .setMessage("Silahkan coba lagi")
+                    .setPositiveButton("OK") { dialog, _ -> dialog.dismiss() }
+                    .show()
+            }
         }
     }
 }
