@@ -12,6 +12,7 @@ import androidx.appcompat.app.AlertDialog
 import com.example.nantawiltawijaya_3tib.DetailActivity
 import com.example.nantawiltawijaya_3tib.Home.pertemuan_5.LimaActivity
 import com.example.nantawiltawijaya_3tib.Home.pertemuan_6.SixthActivity
+import com.example.nantawiltawijaya_3tib.Home.pertemuan_9.NinthActivity
 import com.example.nantawiltawijaya_3tib.LoginActivity
 import com.example.nantawiltawijaya_3tib.R
 import com.example.nantawiltawijaya_3tib.databinding.FragmentHomeBinding
@@ -81,6 +82,11 @@ class HomeFragment : Fragment() {
         binding.btnToEnam.setOnClickListener {
             startActivity(Intent(requireContext(), SixthActivity::class.java))
         }
+
+        binding.btnToSembilan.setOnClickListener {
+            startActivity(Intent(requireContext(), NinthActivity::class.java))
+        }
+
 
         binding.btnLogOut.setOnClickListener {
             AlertDialog.Builder(requireContext())
